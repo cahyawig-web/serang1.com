@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BotolPro — Admin Console</title>
+<style>
+    /* HALAMAN LOGIN */
+.login-screen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(135deg,#102744,#2563eb);
+}
+
+.login-card{
+  width:100%;
+  max-width:410px;
+  background:white;
+  padding:35px;
+  border-radius:18px;
+  box-shadow:0 20px 60px #0003;
+}
+
+.login-logo{
+  width:60px;
+  height:60px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 15px;
+  background:#ffc43d;
+  color:#14263d;
+  border-radius:14px;
+  font-size:30px;
+  font-weight:900;
+}
+
+.login-card h2{
+  text-align:center;
+  margin:0;
+  color:#102744;
+  font-size:25px;
+}
+
+.login-subtitle{
+  text-align:center;
+  color:#78869a;
+  font-size:12px;
+  margin:8px 0 28px;
+}
+
+.login-field{
+  margin-bottom:17px;
+}
+
+.login-field label{
+  display:block;
+  font-weight:700;
+  margin-bottom:7px;
+  font-size:12px;
+}
+
+.login-field input{
+  width:100%;
+  padding:13px;
+  border:1px solid #dfe5ed;
+  border-radius:9px;
+  outline:none;
+}
+
+.login-field input:focus{
+  border-color:#2563eb;
+}
+
+.password-wrap{
+  display:flex;
+  gap:7px;
+}
+
+.password-wrap input{
+  flex:1;
+  min-width:0;
+}
+
+.password-wrap button{
+  background:#edf2f8;
+  color:#26364b;
+}
+
+.login-button{
+  width:100%;
+  padding:13px;
+  background:#2563eb;
+  color:white;
+  margin-top:8px;
+}
+
+.login-error{
+  color:#d9534f;
+  font-size:12px;
+  margin-top:12px;
+  text-align:center;
+}
+
+.login-footer{
+  text-align:center;
+  color:#9aa5b4;
+  font-size:11px;
+  margin-top:25px;
+}
+
+.logout-btn{
+  background:#fff;
+  color:#d9534f;
+  border:1px solid #f1dada;
+}
+
+@media(max-width:480px){
+  .login-card{padding:25px 20px}
+}
+:root{--navy:#102744;--navy2:#193c65;--blue:#2563eb;--bg:#f5f7fb;--text:#182230;--muted:#78869a;--line:#e8edf4;--green:#16a36a;--yellow:#f3b72f;--red:#d9534f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:9px;padding:10px 14px;font-weight:650}
+.app{min-height:100vh;display:flex}.sidebar{width:235px;background:var(--navy);color:#d9e5f5;padding:22px 15px;display:flex;flex-direction:column;position:fixed;inset:0 auto 0 0}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:#fff;margin:4px 8px 36px}.brand-b{background:#ffc43d;color:#14263d;border-radius:9px;padding:7px 10px}.sub{font-size:9px;letter-spacing:2px;color:#8fa6c4;margin-left:4px}
+.nav-label{font-size:10px;letter-spacing:1.5px;color:#8fa6c4;margin:0 9px 12px}.nav button{width:100%;text-align:left;background:transparent;color:#bdcce0;margin:3px 0;padding:12px;border-radius:9px}.nav button.active{background:#244a77;color:white;box-shadow:inset 3px 0 #ffc43d}.nav button span{display:inline-block;width:25px}.side-bottom{margin-top:auto}.target{background:#183b63;border:1px solid #2c527d;border-radius:10px;padding:13px;font-size:12px;margin-bottom:20px}.admin{font-weight:700;padding:8px}
+main{margin-left:235px;width:calc(100% - 235px);padding:28px 30px 60px;max-width:1600px}.topline{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:24px}.date-small{font-size:10px;letter-spacing:1.3px;color:#8a97a8;font-weight:700}.page-title{font-size:27px;margin:7px 0 0;font-weight:650}.top-actions{display:flex;gap:9px;align-items:center}.top-actions input{width:150px}.primary{background:var(--blue);color:#fff;box-shadow:0 5px 12px #2563eb30}.secondary{background:#fff;border:1px solid var(--line);color:#26364b}.danger{background:#fff;color:var(--red);border:1px solid #f1dada;padding:7px 10px}.eyebrow{font-size:10px;color:var(--blue);font-weight:800;letter-spacing:1.5px;margin:22px 0 6px}.section-title{font-size:21px;margin:0 0 7px}.muted{color:var(--muted)}.intro{margin:0 0 18px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0 22px}.stat,.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:18px}.stat .label{color:var(--muted);font-size:12px}.stat strong{display:block;font-size:25px;margin:8px 0 4px}.stat small{color:var(--muted)}
+.panel{padding:0;overflow:hidden;margin-bottom:18px}.panel-head{padding:17px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}.panel-head h3{font-size:15px;margin:0}.panel-head p{font-size:11px;color:var(--muted);margin:4px 0 0}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;white-space:nowrap}th{font-size:10px;letter-spacing:.7px;color:#93a0b1;text-align:left;background:#fbfcfe;padding:13px 15px}td{padding:14px 15px;border-top:1px solid #f0f2f6;font-size:12px}tr:hover td{background:#fcfdff}.person{display:flex;align-items:center;gap:9px;font-weight:700}.avatar{width:29px;height:29px;border-radius:50%;display:grid;place-items:center;background:#e2edff;color:#3471c8;font-size:10px;font-weight:800}.pill{display:inline-block;border-radius:5px;padding:5px 8px;font-size:10px;font-weight:750}.pill.green{background:#d9f7eb;color:#13865a}.pill.yellow{background:#fff2c8;color:#a36b00}.pill.gray{background:#edf1f6;color:#69788b}.pill.red{background:#fde7e7;color:#bd4141}
+.bar-card{background:#1b416d;color:white;border-radius:12px;padding:19px 22px;margin:18px 0;display:flex;justify-content:space-between;align-items:center;gap:15px}.bar-card strong{font-size:24px}.bars{height:68px;display:flex;align-items:end;gap:8px}.bars i{display:block;width:25px;background:#6399d0;border-radius:3px 3px 0 0}.bars i:last-child{background:#ffc13a}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;padding:18px}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px}.field input,.field select,.top-actions input{width:100%;padding:11px;border:1px solid #dfe5ed;border-radius:8px;background:white;color:#243247;outline:none}.field input:focus,.field select:focus{border-color:#6c9cf4;box-shadow:0 0 0 3px #2563eb18}.form-actions{padding:0 18px 18px;display:flex;gap:8px;justify-content:flex-end}.hidden{display:none!important}.empty{text-align:center;padding:28px;color:var(--muted)}
+.notice{margin:12px 18px 18px;padding:12px;border-radius:8px;background:#f3f7ff;color:#526783;font-size:12px}
+.report-banner{background:#1b416d;color:white;border-radius:12px;padding:20px;display:flex;justify-content:space-between;align-items:center;margin:18px 0}.report-banner strong{font-size:26px}
+.modal-backdrop{position:fixed;inset:0;background:#07162980;display:grid;place-items:center;padding:16px;z-index:10}.modal{width:min(570px,100%);background:white;border-radius:14px;box-shadow:0 20px 60px #0003;overflow:hidden}.modal h3{margin:0;font-size:17px}.modal .panel-head{padding:18px}.modal .form-grid{padding-top:18px}
+.toast{position:fixed;right:20px;bottom:20px;background:#142d4b;color:white;padding:12px 16px;border-radius:9px;box-shadow:0 8px 25px #0002;z-index:20}
+@media(max-width:900px){.sidebar{width:190px}main{margin-left:190px;width:calc(100% - 190px);padding:22px 18px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.sidebar{width:64px;padding:15px 8px}.brand{margin:5px 3px 30px;font-size:0}.brand-b{font-size:17px}.sub,.nav-label,.nav button .navtext,.target,.admin{display:none}.nav button{padding:13px 8px;text-align:center}.nav button span{width:auto}main{margin-left:64px;width:calc(100% - 64px);padding:17px 12px}.topline{align-items:flex-start;flex-direction:column}.top-actions{width:100%}.top-actions input{flex:1}.grid{gap:8px}.stat{padding:12px}.stat strong{font-size:19px}.page-title{font-size:23px}.bar-card{align-items:flex-start;flex-direction:column}.bars{height:48px}.form-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- HALAMAN LOGIN -->
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+
+    <div class="login-logo">B</div>
+
+    <h2>BotolPro</h2>
+    <p class="login-subtitle">
+      ADMIN CONSOLE<br>
+      Silakan login untuk melanjutkan
+    </p>
+
+    <form id="loginForm">
+
+      <div class="login-field">
+        <label>Username</label>
+        <input
+          type="text"
+          id="loginUsername"
+          placeholder="Masukkan username"
+          required
+          autocomplete="username"
+        >
+      </div>
+
+      <div class="login-field">
+        <label>Password</label>
+        <div class="password-wrap">
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Masukkan password"
+            required
+            autocomplete="current-password"
+          >
+          <button type="button" id="togglePassword">Lihat</button>
+        </div>
+      </div>
+
+      <button type="submit" class="login-button">
+        Masuk ke Dashboard
+      </button>
+
+      <div id="loginError" class="login-error"></div>
+
+    </form>
+
+    <div class="login-footer">
+      BotolPro Admin · Akses khusus administrator
+    </div>
+
+  </div>
+</div>
+
+<!-- DASHBOARD BOTOLPRO -->
+<div class="app hidden" id="adminApp">
+<aside class="sidebar">
+ <div class="brand"><span class="brand-b">B</span><span>BotolPro<small class="sub" style="display:block">ADMIN CONSOLE</small></span></div>
+ <div class="nav-label">MENU UTAMA</div>
+ <nav class="nav">
+  <button class="active" data-page="dashboard"><span>▦</span><span class="navtext">Ringkasan</span></button>
+  <button data-page="sales"><span>▥</span><span class="navtext">Penjualan</span></button>
+  <button data-page="attendance"><span>▤</span><span class="navtext">Absensi</span></button>
+  <button data-page="report"><span>▣</span><span class="navtext">Laporan mingguan</span></button>
+ </nav>
+ <div class="side-bottom"><div class="target">🏆 <b>Target harian</b><br><small>25 botol / sales</small></div><div class="admin">◉ Admin Operasional<br><small class="muted">Administrator</small></div></div>
+</aside>
+<main>
+ <div class="topline">
+  <div><div class="date-small" id="todayLabel"></div><h1 class="page-title" id="pageTitle">Ringkasan</h1></div>
+<div class="top-actions">
+  <input type="date" id="globalDate">
+  <button class="primary" id="addTop">
+    ＋ Catat penjualan
+  </button>
+  <button class="logout-btn" id="logoutBtn">
+    Keluar
+  </button>
+</div> </div>
+ <section id="dashboardPage">
+  <div class="eyebrow">PANTAUAN HARIAN</div><h2 class="section-title">Ringkasan penjualan</h2><p class="intro">Pantau pencapaian botol dan estimasi tunjangan sales.</p>
+  <div class="grid" id="stats"></div>
+  <div class="panel"><div class="panel-head"><div><h3>Penjualan terbaru</h3><p>Catatan penjualan berdasarkan tanggal yang dipilih</p></div><button class="secondary" data-goto="sales">Lihat semua</button></div><div class="table-wrap" id="dashTable"></div></div>
+ </section>
+ <section id="salesPage" class="hidden">
+  <div class="eyebrow">INPUT HARIAN</div><h2 class="section-title">Penjualan sales</h2><p class="intro">Masukkan pencapaian botol setiap sales untuk menghitung tunjangan otomatis.</p>
+  <div class="panel"><div class="panel-head"><div><h3>Daftar pencapaian</h3><p>CRUD data penjualan — tambah, edit, dan hapus</p></div><button class="primary" id="addSales">＋ Catat penjualan</button></div><div class="table-wrap" id="salesTable"></div></div>
+ </section>
+ <section id="attendancePage" class="hidden">
+  <div class="eyebrow">REKAP KEHADIRAN</div><h2 class="section-title">Absensi sales</h2><p class="intro">Hari dengan penjualan 0 botol atau tanpa catatan tidak memperoleh uang absen.</p>
+  <div class="panel"><div class="panel-head"><div><h3>Rincian uang absen</h3><p>Rp10.000 per hari dengan penjualan lebih dari 0 botol; dibayarkan jika total mingguan minimal 25 botol.</p></div></div><div class="table-wrap" id="attendanceTable"></div></div>
+ </section>
+ <section id="reportPage" class="hidden">
+  <div class="eyebrow">ANALISIS PERFORMA</div><h2 class="section-title">Laporan mingguan</h2><p class="intro" id="weekRange"></p>
+  <div class="report-banner"><div><small>Total botol minggu ini</small><br><strong id="weekTotal">0 botol</strong><br><small id="weekCaption">Perhitungan berdasarkan catatan harian</small></div><div class="bars" id="weekBars"></div></div>
+  <div class="panel"><div class="panel-head"><div><h3>Peringkat mingguan</h3><p>Urutan berdasarkan pencapaian botol</p></div><button class="secondary" id="exportBtn">⇩ Export laporan CSV</button></div><div class="table-wrap" id="reportTable"></div></div>
+ </section>
+</main>
+</div>
+<div id="modalRoot"></div><div id="toastRoot"></div>
+<script>
+const KEY='botolpro_records_v1';
+let records=load(), editingId=null;
+const $=s=>document.querySelector(s);
+// ===================================
+// LOGIN ADMIN BOTOLPRO
+// ===================================
+
+const ADMIN_USERNAME = 'admin';
+const ADMIN_PASSWORD = 'BotolPro123!';
+
+const LOGIN_KEY = 'botolpro_admin_logged_in';
+
+function checkLogin(){
+
+  if(sessionStorage.getItem(LOGIN_KEY) === 'true'){
+    $('#loginScreen').classList.add('hidden');
+    $('#adminApp').classList.remove('hidden');
+  }else{
+    $('#loginScreen').classList.remove('hidden');
+    $('#adminApp').classList.add('hidden');
+  }
+
+}
+
+$('#loginForm').addEventListener('submit',function(e){
+
+  e.preventDefault();
+
+  const username = $('#loginUsername').value.trim();
+  const password = $('#loginPassword').value;
+
+  if(
+    username === ADMIN_USERNAME &&
+    password === ADMIN_PASSWORD
+  ){
+
+    sessionStorage.setItem(LOGIN_KEY,'true');
+
+    $('#loginError').textContent = '';
+    $('#loginPassword').value = '';
+
+    checkLogin();
+    render();
+
+  }else{
+
+    $('#loginError').textContent =
+      'Username atau password salah!';
+
+  }
+
+});
+
+// Tampilkan atau sembunyikan password
+$('#togglePassword').onclick = function(){
+
+  const input = $('#loginPassword');
+
+  if(input.type === 'password'){
+    input.type = 'text';
+    this.textContent = 'Sembunyikan';
+  }else{
+    input.type = 'password';
+    this.textContent = 'Lihat';
+  }
+
+};
+
+// Logout admin
+$('#logoutBtn').onclick = function(){
+
+  if(confirm('Apakah Anda yakin ingin keluar dari BotolPro?')){
+
+    sessionStorage.removeItem(LOGIN_KEY);
+    $('#loginUsername').value = '';
+    $('#loginPassword').value = '';
+
+    checkLogin();
+
+  }
+
+};
+
+// Periksa status login ketika halaman dibuka
+checkLogin();
+const money=n=>'Rp'+Number(n||0).toLocaleString('id-ID');
+const dateNow=()=>new Date().toISOString().slice(0,10);
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function save(){localStorage.setItem(KEY,JSON.stringify(records));render()}
+function toast(s){$('#toastRoot').innerHTML='<div class="toast">'+s+'</div>';setTimeout(()=>$('#toastRoot').innerHTML='',2400)}
+function weekStart(d){let x=new Date(d+'T12:00:00');let day=(x.getDay()+6)%7;x.setDate(x.getDate()-day);return x.toISOString().slice(0,10)}
+function addDays(s,n){let d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
+function fmtDate(s){return new Date(s+'T12:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})}
+function dailyBonus(b){return b>=25?40000:b>=18?15000:0}
+function weeklyData(start){
+ let end=addDays(start,6), list=records.filter(r=>r.date>=start&&r.date<=end), map={};
+ list.forEach(r=>{let k=r.name.trim().toLowerCase();if(!map[k])map[k]={name:r.name,area:r.area||'-',bottles:0,attendanceDays:0,salesBonus:0,rows:[]};let m=map[k];m.bottles+=r.bottles;m.attendanceDays+=r.bottles>0?1:0;m.salesBonus+=dailyBonus(r.bottles);m.rows.push(r)});
+ Object.values(map).forEach(m=>{m.attendanceBonus=m.bottles>=25?m.attendanceDays*10000:0;m.total=m.salesBonus+m.attendanceBonus});
+ return {list,map:Object.values(map),start,end,total:list.reduce((a,r)=>a+r.bottles,0)};
+}
+function initials(n){return n.split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase()}
+function table(rows,kind){
+ if(!rows.length)return '<div class="empty">Belum ada data. Klik “Catat penjualan” untuk menambahkan data.</div>';
+ let head=kind==='report'?'<th>#</th><th>NAMA SALES</th><th>AREA</th><th>TOTAL BOTOL</th><th>UANG PENJUALAN</th><th>UANG ABSEN</th><th>TOTAL</th>':
+ kind==='attendance'?'<th>NAMA SALES</th><th>AREA</th><th>TOTAL MINGGU</th><th>HARI AKTIF</th><th>STATUS ABSEN</th><th>UANG ABSEN</th>':
+ '<th>TANGGAL</th><th>NAMA SALES</th><th>AREA</th><th>BOTOL TERJUAL</th><th>HASIL PENJUALAN</th><th>AKSI</th>';
+ let body=rows.map((r,i)=>{
+ if(kind==='report')return `<tr><td>${i+1}</td><td><div class="person"><span class="avatar">${initials(r.name)}</span>${esc(r.name)}</div></td><td>${esc(r.area)}</td><td><b>${r.bottles} botol</b></td><td>${money(r.salesBonus)}</td><td>${money(r.attendanceBonus)}</td><td><b>${money(r.total)}</b></td></tr>`;
+ if(kind==='attendance')return `<tr><td><div class="person"><span class="avatar">${initials(r.name)}</span>${esc(r.name)}</div></td><td>${esc(r.area)}</td><td><b>${r.bottles} botol</b></td><td>${r.attendanceDays} hari</td><td><span class="pill ${r.bottles>=25?'green':'yellow'}">${r.bottles>=25?'Memenuhi syarat':'Uang absen hangus'}</span></td><td><b>${money(r.attendanceBonus)}</b></td></tr>`;
+ let bonus=dailyBonus(r.bottles), pill=bonus===40000?'green':bonus===15000?'yellow':'gray';
+ return `<tr><td>${fmtDate(r.date)}</td><td><div class="person"><span class="avatar">${initials(r.name)}</span>${esc(r.name)}</div></td><td>${esc(r.area)}</td><td><b>${r.bottles} botol</b></td><td><span class="pill ${pill}">${bonus?money(bonus):'Tidak mendapat uang penjualan'}</span></td><td><button class="secondary" onclick="editRecord('${r.id}')">Edit</button> <button class="danger" onclick="deleteRecord('${r.id}')">Hapus</button></td></tr>`;
+ }).join('');
+ return `<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function selectedDate(){return $('#globalDate').value||dateNow()}
+function render(){
+ let date=selectedDate(), start=weekStart(date), week=weeklyData(start), todayRows=records.filter(r=>r.date===date);
+ $('#todayLabel').textContent=new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+ $('#stats').innerHTML=[
+ ['Total botol hari ini',todayRows.reduce((a,r)=>a+r.bottles,0)+' botol','Jumlah penjualan tercatat'],
+ ['Sales tercatat',todayRows.length+' catatan','Data pada tanggal terpilih'],
+ ['Uang penjualan hari ini',money(todayRows.reduce((a,r)=>a+dailyBonus(r.bottles),0)),'Insentif harian per sales'],
+ ['Total botol minggu ini',week.total+' botol','Senin–Minggu']
+ ].map(x=>`<div class="stat"><div class="label">${x[0]}</div><strong>${x[1]}</strong><small>${x[2]}</small></div>`).join('');
+ $('#dashTable').innerHTML=table(todayRows.slice().sort((a,b)=>a.name.localeCompare(b.name)),'sales');
+$('#salesTable').innerHTML=table(
+    records
+        .filter(r => r.date >= start && r.date <= week.end)
+        .sort((a,b) => {
+            if (a.date !== b.date) {
+                return a.date.localeCompare(b.date);
+            }
+            return a.name.localeCompare(b.name);
+        }),
+    'sales'
+); $('#attendanceTable').innerHTML=table(week.map,'attendance');
+ $('#reportTable').innerHTML=table(week.map.sort((a,b)=>b.bottles-a.bottles),'report');
+ $('#weekRange').textContent=fmtDate(week.start)+' sampai '+fmtDate(week.end)+' · perhitungan berdasarkan catatan harian';
+ $('#weekTotal').textContent=week.total+' botol';
+ $('#weekCaption').textContent=week.list.length+' catatan selama 7 hari';
+ let dayTotals=Array.from({length:7},(_,i)=>week.list.filter(r=>r.date===addDays(start,i)).reduce((a,r)=>a+r.bottles,0)), max=Math.max(1,...dayTotals);
+ $('#weekBars').innerHTML=dayTotals.map(n=>`<i title="${n} botol" style="height:${Math.max(7,n/max*62)}px"></i>`).join('');
+}
+function openForm(rec=null){
+ editingId=rec?.id||null;
+ $('#modalRoot').innerHTML=`<div class="modal-backdrop" onclick="if(event.target===this)closeForm()"><div class="modal"><div class="panel-head"><h3>${rec?'Edit catatan':'Catat penjualan'}</h3><button class="secondary" onclick="closeForm()">✕</button></div>
+ <form id="salesForm"><div class="form-grid">
+ <div class="field"><label>Tanggal</label><input type="date" name="date" required value="${rec?.date||selectedDate()}"></div>
+ <div class="field"><label>Nama sales</label><input name="name" required maxlength="70" placeholder="Contoh: Andi Pratama" value="${esc(rec?.name||'')}"></div>
+ <div class="field"><label>Area</label><input name="area" maxlength="70" placeholder="Contoh: Jakarta Selatan" value="${esc(rec?.area||'')}"></div>
+ <div class="field"><label>Botol terjual</label><input name="bottles" type="number" min="0" step="1" required value="${rec?.bottles??0}"></div>
+ </div><div class="notice">Insentif penjualan dihitung otomatis: 18–24 botol = Rp15.000; minimal 25 botol = Rp40.000. Penjualan 0 botol tidak mendapat uang absen.</div>
+ <div class="form-actions"><button type="button" class="secondary" onclick="closeForm()">Batal</button><button class="primary" type="submit">Simpan data</button></div></form></div></div>`;
+ $('#salesForm').addEventListener('submit',e=>{
+ e.preventDefault();let f=new FormData(e.target), item={date:f.get('date'),name:f.get('name').trim(),area:f.get('area').trim()||'-',bottles:Number(f.get('bottles'))};
+ if(!item.name||!Number.isInteger(item.bottles)||item.bottles<0){toast('Periksa kembali data yang diisi.');return}
+ let duplicate=records.find(r=>r.id!==editingId&&r.date===item.date&&r.name.trim().toLowerCase()===item.name.toLowerCase());
+ if(duplicate){toast('Sales ini sudah memiliki catatan pada tanggal tersebut. Edit catatan yang ada.');return}
+ if(editingId){Object.assign(records.find(r=>r.id===editingId),item);toast('Catatan berhasil diperbarui.')}
+ else{records.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),...item});toast('Penjualan berhasil ditambahkan.')}
+ closeForm();$('#globalDate').value=item.date;save();
+ });
+}
+function closeForm(){$('#modalRoot').innerHTML='';editingId=null}
+function editRecord(id){let r=records.find(x=>x.id===id);if(r)openForm(r)}
+function deleteRecord(id){let r=records.find(x=>x.id===id);if(!r)return;if(confirm('Hapus catatan '+r.name+' tanggal '+fmtDate(r.date)+'? Data yang dihapus tidak dapat dikembalikan.')){records=records.filter(x=>x.id!==id);save();toast('Catatan berhasil dihapus.')}}
+window.editRecord=editRecord;window.deleteRecord=deleteRecord;window.closeForm=closeForm;
+function showPage(p){['dashboard','sales','attendance','report'].forEach(k=>{$('#'+k+'Page').classList.toggle('hidden',k!==p)});document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p));$('#pageTitle').textContent={dashboard:'Ringkasan',sales:'Penjualan',attendance:'Absensi',report:'Laporan mingguan'}[p]}
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>showPage(b.dataset.goto));
+$('#addTop').onclick=()=>openForm();$('#addSales').onclick=()=>openForm();
+$('#globalDate').value=dateNow();$('#globalDate').onchange=render;
+$('#exportBtn').onclick=()=>{
+ let w=weeklyData(weekStart(selectedDate())), rows=[['Nama sales','Area','Total botol','Hari aktif','Uang penjualan','Uang absen','Total tunjangan']];
+ w.map.sort((a,b)=>b.bottles-a.bottles).forEach(r=>rows.push([r.name,r.area,r.bottles,r.attendanceDays,r.salesBonus,r.attendanceBonus,r.total]));
+ let csv=rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+ let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='laporan-mingguan-'+w.start+'.csv';a.click();URL.revokeObjectURL(url);
+};
+render();
+</script>
+</body>
+</html>
